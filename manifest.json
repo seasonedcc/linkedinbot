@@ -5,17 +5,17 @@
     "manifest_version": 2,
     "permissions": ["storage", "declarativeContent"],
     "background": {
-      "scripts": ["background.js"],
+      "scripts": ["src/background.js"],
       "persistent": false
     },
-    "options_page": "options.html",
+    "options_page": "ui/options.html",
     "browser_action": {
-        "default_popup": "popup.html"
+        "default_popup": "ui/popup.html"
     },
     "content_scripts": [
         {
           "matches": ["https://www.linkedin.com/me/profile-views/urn:li:wvmp:summary/"],
-          "js": ["contentScript.js"]
+          "js": ["src/contentScript.js"]
         }
       ]
 }
