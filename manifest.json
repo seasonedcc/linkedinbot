@@ -1,0 +1,21 @@
+{
+    "name": "LinkedIn Bot",
+    "version": "1.0",
+    "description": "Automate some tasks in LinkedIn",
+    "manifest_version": 2,
+    "permissions": ["storage", "declarativeContent"],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "options_page": "options.html",
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+          "matches": ["https://www.linkedin.com/me/profile-views/urn:li:wvmp:summary/"],
+          "js": ["contentScript.js"]
+        }
+      ]
+}
