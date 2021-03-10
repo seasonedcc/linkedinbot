@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "test": "http-server ./test & /opt/google/chrome/chrome http://127.0.0.1:8080/?linkedinbot_withdraw=true"
+  },
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}
