@@ -15,7 +15,11 @@
     "content_scripts": [
         {
           "matches": ["https://www.linkedin.com/me/profile-views/urn:li:wvmp:summary/"],
-          "js": ["src/contentScript.js"]
+          "js": ["src/profileViews.js"]
+        },
+        {
+          "matches": ["https://www.linkedin.com/mynetwork/invitation-manager/sent/?linkedinbot_withdraw=true"],
+          "js": ["src/invitationsSent.js"]
         }
       ]
 }
