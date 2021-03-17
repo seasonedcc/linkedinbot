@@ -1,33 +1,41 @@
-const re = /(\d+) months ago/
+const re = /month/
 
 const oldEnough = (el) => {
-    const monthsAgoMatch = el.innerHTML.match(re)
-    if(monthsAgoMatch && monthsAgoMatch.length && monthsAgoMatch.length > 1) {
-        const monthsAgo = parseInt(monthsAgoMatch[1])
-        return monthsAgo >= 3
-    }
-    return false
-}
-
-const hasWithdrawButton = (el) => {
     const invitationCard = el.closest('li.invitation-card')
     if(invitationCard) {
-        const withdrawButton = invitationCard.querySelector('button[data-control-name=withdraw_single]')
-        return !R.isNil(withdrawButton )
+        const timeBadge = invitationCard.querySelector(`[class*="time-badge time-ago"]`)
+        const monthsAgoMatch = timeBadge.innerHTML.match(re)
+        return (monthsAgoMatch && monthsAgoMatch.length && monthsAgoMatch.length > 0)
     }
     return false
 }
 
-const filterCondition = R.allPass([oldEnough, hasWithdrawButton])
+const filterCondition = R.allPass([oldEnough])
+const withdrawButtonsToBeClicked = R.filter(filterCondition)
 
-const withdrawButtons = R.filter(filterCondition)
-
-const timeBadges = document.querySelectorAll(`[class*="time-badge time-ago"]`)
-
-const withdraw = (withdrawButton) => {
+const withdrawOne = (withdrawButton) => {
     withdrawButton.click()
     const confirm = document.querySelector('button[data-test-dialog-primary-btn]')
     if(confirm) confirm.click()
 }
 
-withdrawButtons(timeBadges).forEach(withdraw)
+const withdrawAll = () => {
+    const withdrawButtons = document.querySelectorAll('button[data-control-name=withdraw_single]')
+
+    console.log('TO BE CLICKED', withdrawButtonsToBeClicked(withdrawButtons))
+    // withdrawButtonsToBeClicked(withdrawButtons).forEach(withdrawOne)
+}
+
+window.setTimeout(() => {
+    withdrawAll()
+}, 1000)
+
+
+// const pages = document.querySelectorAll(`li[data-test-pagination-page-btn]`)
+// pages.forEach((page) => {
+//     const pageButton = page.querySelector('button')
+//     if(pageButton) {
+//         pageButton.click()
+//         withdrawAll()
+//     }
+// })

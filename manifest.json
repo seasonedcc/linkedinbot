@@ -18,8 +18,9 @@
           "js": ["src/profileViews.js"]
         },
         {
-          "matches": ["*://*/*?linkedinbot_withdraw=true"],
-          "js": ["lib/ramda.min.js", "src/invitationsSent.js"]
+          "matches": ["*://*/*linkedinbot_withdraw=true"],
+          "js": ["lib/ramda.min.js", "src/invitationsSent.js"],
+          "run_at": "document_end"
         }
       ]
 }
